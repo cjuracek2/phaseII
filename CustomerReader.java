@@ -1,4 +1,4 @@
-package phase1;
+package phaseII;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -64,7 +64,7 @@ public class CustomerReader {
 				Customer customer = new Customer(customerCode, type, contact, name, address);
 				
 				
-				// Adds the Person object into Customer ArrayList
+				// Adds the customer object into Customer ArrayList
 				customerList.add(customer);
 			}
 			sc.close();

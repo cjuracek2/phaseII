@@ -1,8 +1,10 @@
-package product;
+package phaseII;
+
 
 public abstract class Product {
 	private String productCode;
 	private char Type;
+
 
 	//constructor, wont be used in our code
 	public Product(String productCode, char type) {
@@ -23,6 +25,14 @@ public abstract class Product {
 	}
 	public void setType(char type) {
 		Type = type;
+	}
+	
+	abstract public double getSubtotal(int quantity);
+	
+	//abstract public int setQuantity();
+
+	public int setQuantity(int quantity) {
+		return quantity;
 	}
 	
 	

@@ -1,14 +1,15 @@
-package product;
+package phaseII;
 
 public class MovieTicket extends Product {
 	private String movieDate;
 	private String movieName;
 	private Address address;
 	private String screenNo;
-	private String pricePerUnit;
+	private double pricePerUnit;
 
+	
 	public MovieTicket(String productCode, char type, String movieDate, String movieName, Address address,
-			String screenNo, String pricePerUnit) {
+			String screenNo, double pricePerUnit) {
 		super(productCode, type);
 		this.movieDate = movieDate;
 		this.movieName = movieName;
@@ -49,12 +50,22 @@ public class MovieTicket extends Product {
 		this.screenNo = screenNo;
 	}
 
-	public String getPricePerUnit() {
+	public double getPricePerUnit() {
 		return pricePerUnit;
 	}
 
-	public void setPricePerUnit(String pricePerUnit) {
+	public void setPricePerUnit(double pricePerUnit) {
 		this.pricePerUnit = pricePerUnit;
 	}
+	
+
+	
+	@Override	
+	public double getSubtotal(int quantity) {
+		return quantity*pricePerUnit;
+	}
+	
+	
+	
 	
 }
