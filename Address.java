@@ -1,4 +1,4 @@
-package phaseII;
+package product;
 
 public class Address {
 			private String street;

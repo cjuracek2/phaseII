@@ -1,4 +1,4 @@
-package phaseII;
+package product;
 
 import java.util.ArrayList;
 import java.io.*;

@@ -1,9 +1,6 @@
-package phaseII;
+package product;
 
-
-public class
-
-ParkingPass extends Product {
+public class ParkingPass extends Product {
 	private String parkingFee;
 
 	public ParkingPass(String productCode, char type, String parkingFee) {

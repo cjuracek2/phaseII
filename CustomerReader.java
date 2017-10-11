@@ -1,4 +1,4 @@
-package phaseII;
+package phase1;
 
 import java.io.File;
 import java.io.FileNotFoundException;

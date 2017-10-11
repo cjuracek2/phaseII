@@ -1,4 +1,4 @@
-package phaseII;
+package product;
 
 public class Refreshment extends Product {
 	private String name;

@@ -1,9 +1,6 @@
-package phaseII;
+package product;
 
-
-public class
-
-SeasonPass extends Product {
+public class SeasonPass extends Product {
 	private String name;
 	private String startdate;
 	private String endDate;

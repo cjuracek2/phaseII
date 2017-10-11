@@ -1,4 +1,4 @@
-package phaseII;
+package product;
 
 public class MovieTicket extends Product {
 	private String movieDate;

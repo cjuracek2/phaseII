@@ -1,4 +1,4 @@
-package phaseII;
+package phase1;
 
 public class Customer {
 	
@@ -7,7 +7,6 @@ public class Customer {
 	private Person contact;
 	private String name;
 	private Address address;
-	private double studentDiscount;
 	
 	
 	
@@ -45,25 +44,15 @@ public class Customer {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
+
 	public String getName() {
 		return name;
 	}
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
-
-
-	public double getStudentDiscount() {
-		return studentDiscount;
-	}
-
-	public void setStudentDiscount(double studentDiscount) {
-		if (type.equals("S")){
-			studentDiscount = 8;
-		}else {
-			studentDiscount = 0;
-		}
-		this.studentDiscount = studentDiscount;
-	}
-		
+	
 }
