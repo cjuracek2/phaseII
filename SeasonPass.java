@@ -1,16 +1,17 @@
 package phaseII;
-
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 public class
 
 SeasonPass extends Product {
 	private String name;
-	private String startdate;
-	private String endDate;
+	private DateTime startdate;
+	private DateTime endDate;
 	private double cost;
-	private String invDate;
+	private DateTime invDate;
 	
-	public SeasonPass(String productCode, char type, String name, String startdate, String endDate, double cost) {
+	public SeasonPass(String productCode, String type, String name, DateTime startdate, DateTime endDate, double cost) {
 		super(productCode, type);
 		this.name = name;
 		this.startdate = startdate;
@@ -26,19 +27,19 @@ SeasonPass extends Product {
 		this.name = name;
 	}
 
-	public String getStartdate() {
+	public DateTime getStartdate() {
 		return startdate;
 	}
 
-	public void setStartdate(String startdate) {
+	public void setStartdate(DateTime startdate) {
 		this.startdate = startdate;
 	}
 
-	public String getEndDate() {
+	public DateTime getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
 
@@ -47,14 +48,17 @@ SeasonPass extends Product {
 		this.cost = cost;
 	}
 	
-	public void setInvDate(String invDate) {
+	public void setInvDate(DateTime invDate) {
 		this.invDate = invDate;
 	}
 	
 	@Override	
 	public double getSubtotal(int quantity) {
+		Days startend = Days.daysBetween(startdate, endDate);
+		Days endinv = Days.daysBetween(invDate, startdate);
+		
 		//(cost/days in the season)*days left in the season +8
-		return quantity*((cost/(endDate-startdate))*(endDate-invDate)+8.0);
+		return quantity*((cost/startend.getDays())*(endinv.getDays())+8.0);
 	}
 	
 	@Override
@@ -69,7 +73,9 @@ SeasonPass extends Product {
 	
 	@Override
 	public double getCost() {
-		return (cost/(endDate-startdate))*(endDate-invDate)+8.0;
+		Days startend = Days.daysBetween(startdate, endDate);
+		Days endinv = Days.daysBetween(invDate, startdate);
+		return (cost/startend.getDays())*endinv.getDays()+8.0;
 	}
 	
 

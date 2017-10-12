@@ -4,7 +4,7 @@ public class Refreshment extends Product {
 	private String name;
 	private double cost;
 	
-	public Refreshment(String productCode, char type, String name, double cost) {
+	public Refreshment(String productCode, String type, String name, double cost) {
 		super(productCode, type);
 		this.name = name;
 		this.cost = cost;

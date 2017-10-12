@@ -18,7 +18,7 @@ public class ProductExporter{
 		tokenScanner.close();
 		String productCode = tokenScanner.next();
 		if(tokenScanner.next() == "M") {
-			char type = 'M';
+			String type = "M";
 			Scanner dT = new Scanner( tokenScanner.next() ).useDelimiter(" ");
 			String DateTime = "Date: " + dT.next() + " Time: " +dT.next();
 			dT.close();
@@ -43,7 +43,7 @@ public class ProductExporter{
 				
 			
 		}else if (tokenScanner.next() == "S") {
-			char type = 'S';
+			String type = "S";
 			String name = tokenScanner.next();
 			String startDate = tokenScanner.next();
 			String endDate = tokenScanner.next();
@@ -53,14 +53,14 @@ public class ProductExporter{
 			productList.add(seasonPass);
 			
 		}else if (tokenScanner.next() == "P") {
-			char type = 'P';
+			String type = "P";
 			String parkingFee = tokenScanner.next();
 			
 			 Product parkingPass = new ParkingPass( productCode , type , parkingFee );
 			productList.add(parkingPass);
 			
 		}else if(tokenScanner.next() == "R") {
-			char type = 'R';
+			String type = "R";
 			String name = tokenScanner.next();
 			String cost = tokenScanner.next();
 			

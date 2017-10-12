@@ -6,7 +6,7 @@ public class
 ParkingPass extends Product {
 	private double parkingFee;
 
-	public ParkingPass(String productCode, char type, double parkingFee) {
+	public ParkingPass(String productCode, String type, double parkingFee) {
 		super(productCode, type);
 		this.parkingFee = parkingFee;
 	}

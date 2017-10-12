@@ -3,7 +3,7 @@ package phaseII;
 import java.util.ArrayList;
 
 public class indInvoice {
-	private int invoiceCode;
+	private String invoiceCode;
 	private Customer customer;
 	private Person salesperson;
 	private String date;
@@ -16,7 +16,7 @@ public class indInvoice {
 	
 	//Get/set invoice code
 	
-	public indInvoice(int invoiceCode, Customer customer, Person salesperson, String date, ArrayList<Product> productInvList, ArrayList<String> quantity, ArrayList<String> ticketCode) {
+	public indInvoice(String invoiceCode, Customer customer, Person salesperson, String date, ArrayList<Product> productInvList, ArrayList<String> quantity, ArrayList<String> ticketCode) {
 		super();
 		this.invoiceCode = invoiceCode;
 		this.customer = customer;
@@ -27,10 +27,10 @@ public class indInvoice {
 		this.ticketCode = ticketCode;
 		//this.invoices = invoices;
 	}
-	public int getInvoiceCode() {
+	public String getInvoiceCode() {
 		return invoiceCode;
 	}
-	public void setInvoiceCode(int invoiceCode) {
+	public void setInvoiceCode(String invoiceCode) {
 		this.invoiceCode = invoiceCode;
 	}
 	

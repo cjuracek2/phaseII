@@ -9,8 +9,7 @@ public class MovieTicket extends Product {
 	private double pricePerUnit;
 
 	
-	public MovieTicket(String productCode, char type, String movieDate, String movieName, Address address,
-			String screenNo, double pricePerUnit) {
+	public MovieTicket(String productCode, String type, String movieDate, String movieName, Address address,String screenNo, double pricePerUnit) {
 		super(productCode, type);
 		this.movieDate = movieDate;
 		this.movieName = movieName;
