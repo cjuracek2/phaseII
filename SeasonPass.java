@@ -8,6 +8,7 @@ SeasonPass extends Product {
 	private String startdate;
 	private String endDate;
 	private double cost;
+	private String invDate;
 	
 	public SeasonPass(String productCode, char type, String name, String startdate, String endDate, double cost) {
 		super(productCode, type);
@@ -41,20 +42,35 @@ SeasonPass extends Product {
 		this.endDate = endDate;
 	}
 
-	public double getCost() {
-		return cost;
-	}
 
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
 	
-	@Override	
-	public double getSubtotal(int quantity) {
-		return quantity*cost;
+	public void setInvDate(String invDate) {
+		this.invDate = invDate;
 	}
 	
+	@Override	
+	public double getSubtotal(int quantity) {
+		//(cost/days in the season)*days left in the season +8
+		return quantity*((cost/(endDate-startdate))*(endDate-invDate)+8.0);
+	}
 	
+	@Override
+	public double getTax() {
+		return .06;
+	}
+		
+	@Override
+	public double getDiscount() {
+		return 0.0;
+	}
+	
+	@Override
+	public double getCost() {
+		return (cost/(endDate-startdate))*(endDate-invDate)+8.0;
+	}
 	
 
 }

@@ -54,16 +54,15 @@ public class Customer {
 
 
 	public double getStudentDiscount() {
-		return studentDiscount;
-	}
-
-	public void setStudentDiscount(double studentDiscount) {
 		if (type.equals("S")){
-			studentDiscount = 8;
+			studentDiscount = .08;
 		}else {
 			studentDiscount = 0;
 		}
-		this.studentDiscount = studentDiscount;
+		return studentDiscount;
 	}
+
+		
+	
 		
 }

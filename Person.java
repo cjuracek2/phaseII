@@ -50,12 +50,12 @@ public class Person {
 		this.email = email;
 	}
 	
+	public String getName() {
+		return firstName + " " + lastName;
+	}
 	
-	//add email method
+	
 
-	//private void addEmail(String email) {
-		//this.email = email;
-		
 		
 	}
 	

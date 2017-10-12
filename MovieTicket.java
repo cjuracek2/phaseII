@@ -2,6 +2,7 @@ package phaseII;
 
 public class MovieTicket extends Product {
 	private String movieDate;
+	//joda time
 	private String movieName;
 	private Address address;
 	private String screenNo;
@@ -65,7 +66,20 @@ public class MovieTicket extends Product {
 		return quantity*pricePerUnit;
 	}
 	
+	@Override
+	public double getTax() {
+		return .06;
+	}
+		
+	@Override
+	public double getDiscount() {
+		//7% discount if Tues/Thurs
+	}
 	
+	@Override
+	public double getCost() {
+		return pricePerUnit;
+	}
 	
 	
 }

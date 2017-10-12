@@ -18,9 +18,6 @@ public class Refreshment extends Product {
 		this.name = name;
 	}
 
-	public double getCost() {
-		return cost;
-	}
 
 	public void setCost(double cost) {
 		this.cost = cost;
@@ -29,6 +26,22 @@ public class Refreshment extends Product {
 	@Override	
 	public double getSubtotal(int quantity) {
 		return quantity*cost;
+	}
+	
+	@Override
+	public double getTax() {
+		return .06;
+	}
+		
+	@Override
+	public double getDiscount() {
+		//5% if the invoice also has a ticket
+		return .05;
+	}
+	
+	@Override
+	public double getCost() {
+		return cost;
 	}
 	
 	

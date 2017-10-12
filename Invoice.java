@@ -56,6 +56,9 @@ public class Invoice {
 				// This Invoice array list stores the Invoice objects 
 				ArrayList<indInvoice> invoiceList = new ArrayList<indInvoice>();
 				ArrayList<Product> productInvList	= new ArrayList<Product>();
+				ArrayList<String> quantity = new ArrayList<String>();
+				ArrayList<String> ticketCode = new ArrayList<String>();
+				
 				
 				while(sc.hasNext()) {
 					String line = sc.nextLine(); // reads each line starting from 2nd line
@@ -70,18 +73,32 @@ public class Invoice {
 					String date = data[3];
 					//separate again 
 					for (int i = 0; i<length-4; i++ ) {
-						String productData[] = data[i+4].split(",");
-						String productCode = productData[0];
-						String quantity = productData[1];
+						String products[] = data[i+4].split(",");
 						
-						Product product = findProductByID(productCode);
-						productInvList.add(product);
+		
 					
+						for (int j = 0; j< products.length; j++) {
+							String productData[] = products[j].split(":");
+							String productCode = productData[0];
+							quantity.add(productData[1]);
+							if (productData.length == 3) {
+								 ticketCode.add(productData[2]);
+							}else { 
+								ticketCode.add(null);
+							}
+							
+							Product product = findProductByID(productCode);
+							productInvList.add(product);
+							
+					
+						}
+				
+
 					}
-					
+
 					Customer customer = findCustomerByID(customerCode);
 					Person salesperson = findPersonByID(salespersonCode);
-					indInvoice invoice = new indInvoice();
+					indInvoice invoice = new indInvoice(invoiceCode,customer,salesperson,date,productInvList,quantity,ticketCode);
 					invoice.add(invoiceList);
 				}
 				sc.close();
@@ -104,8 +121,65 @@ public class Invoice {
 	
 	//Add totals to get summary invoice
 	
+	
+	//------------------------------------------------------------------------------------------------------------
 	//print summary invoice
+	//loop through the invoiceList
+	//Call the invoice methods to get overall subtotals, fees, etc
+	for (indInvoice i : invoiceList) {
+		
+		double total = (i.getSubtotal() + i.getFees() + (i.getTax()*i.getSubtotal()))* i.getDiscount();
+		//format print
+		System.out.print(i.getInvoiceCode(), i.getCustomer().getName(), i.getCustomer().getType(), i.getSalesperson().getName(), i.getSubtotal(), i.getTax()*i.getSubtotal(), i.getFees(), i.getDiscount()*i.getSubtotal(), total));
+		
+	}
+	
 
 	//Print the rest of the invoices
+	//loop through the invoices
+	//print customer, salesperson, contact info
+	//loop through the product list of the invoices
+	ArrayList<String> quantity = new ArrayList<String>();
+	ArrayList<String> ticketCode = new ArrayList<String>();
+	
+	
+	for (indInvoice i : invoiceList) {
+		//print salesperso
+		
+		//print Customer info
+		//print contact info
+		
+		
+		//products
+		quantity = i.getQuantity();
+		int j = 0;
+		double allSub = 0;
+		double allTax = 0;
+	
+		for (Product p : i.getProductList()) {
+			
+			//print product code
+			//print product name (toString method)
+			//print numUnits quantity.get(j)
+			//print cost/unit  getCost method   (with -- free for parking pass method)
+			
+			double subtotal = p.getSubtotal(Integer.parseInt(quantity.get(j)));
+			j = j +1;
+			double tax = p.getTax()*subtotal;
+			if (i.getCustomer().getType().equals("S")) {
+				 tax = 0.0;
+			} 
+			double total = subtotal + tax;
+			
+			allSub = allSub  + subtotal;
+			allTax = allTax + tax;
+		}
+		
+		double allTotal = allSub + allTax;
+		//print all product subtotal, tax, total
+		
+		
+		
+	}
 	
 }

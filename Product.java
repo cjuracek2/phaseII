@@ -29,11 +29,12 @@ public abstract class Product {
 	
 	abstract public double getSubtotal(int quantity);
 	
-	//abstract public int setQuantity();
+	abstract public double getTax();
+	
+	abstract public double getDiscount();
+	
+	abstract public double getCost();
 
-	public int setQuantity(int quantity) {
-		return quantity;
-	}
 	
 	
 }
