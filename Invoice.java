@@ -162,14 +162,22 @@ public class Invoice {
 			//print product name (toString method)
 			//print numUnits quantity.get(j)
 			//print cost/unit  getCost method   (with -- free for parking pass method)
+			double subtotal = 0;
+			if (p.getType().equals("P")) {
+				int moviequant = i.getMovieQuantity(j);
+				int quantitypp = Integer.parseInt(quantity.get(j))-moviequant;
+				subtotal = p.getSubtotal(quantitypp);
+			}else {
+				subtotal = p.getSubtotal(Integer.parseInt(quantity.get(j)));
+				j = j +1;
+			}
 			
-			double subtotal = p.getSubtotal(Integer.parseInt(quantity.get(j)));
-			j = j +1;
+			
 			double tax = p.getTax()*subtotal;
 			if (i.getCustomer().getType().equals("S")) {
 				 tax = 0.0;
 			} 
-			double total = subtotal + tax;
+			double ProductTotal = subtotal + tax;
 			
 			allSub = allSub  + subtotal;
 			allTax = allTax + tax;

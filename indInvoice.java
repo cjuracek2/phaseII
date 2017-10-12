@@ -140,6 +140,16 @@ public class indInvoice {
 		return customer.getFee();
 	}
 	
+	public int getMovieQuantity(int j) {
+		int moviequant = 0;
+		for(int i = 0; i<productInvList.size(); i++) {
+			if (ticketCode.get(j).equals(productInvList.get(i).getProductCode())) {
+				moviequant = Integer.parseInt(quantity.get(i));
+			}
+		}
+		return moviequant;
+	}
+	
 	
 	
 	
