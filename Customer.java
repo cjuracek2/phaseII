@@ -8,6 +8,7 @@ public class Customer {
 	private String name;
 	private Address address;
 	private double studentDiscount;
+	private double fee;
 	
 	
 	
@@ -62,7 +63,14 @@ public class Customer {
 		return studentDiscount;
 	}
 
-		
+	public double getFee() {
+		if(type.equals("S")) {
+			fee = 6.75;
+		}else {
+			fee = 0.0;
+		}
+		return fee;
+	}
 	
 		
 }
