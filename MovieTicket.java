@@ -92,7 +92,7 @@ public class MovieTicket extends Product {
 		}else if (day == 4) {
 			discount = .07;
 		}else {
-			discount = 0.;
+			discount = 0.0;
 		}
 		return discount;
 	}

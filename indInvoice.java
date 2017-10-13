@@ -100,54 +100,6 @@ public class indInvoice {
 	//Method for calculating the overall subtotal, taxes, fees of the invoice
 	//Loop through the product list 
 	
-	public double getSubtotal() {
-		double allSub = 0;
-		int j = 0;
-		for (Product p : productInvList) {
-			double subtotal = p.getSubtotal(Integer.parseInt(quantity.get(j)));
-			allSub = allSub  + subtotal;
-			j = j +1;
-		}
-		return allSub;
-	}
-	
-	public double getTax() {
-		double allTax = 0;
-		for (Product p : productInvList) {
-			double tax = p.getTax();
-			if (customer.getType().equals("S")) {
-				 tax = 0.0;
-			} 
-			allTax = allTax + tax;
-		}
-		return allTax;
-	}
-	
-	
-	public double getDiscount() {
-		double allDiscount = 0;
-		for (Product p : productInvList) {
-			double productDiscount = p.getDiscount();
-			double studentDiscount = customer.getStudentDiscount();
-			double discount = productDiscount + studentDiscount;
-			
-			allDiscount = allDiscount + discount;
-		}
-		return allDiscount;
-	}
-	
-	public double getFees() {
-		double fee;
-		if (customer.isPaidStudentFee()/*.equals(True)*/) {
-			fee = 0;
-		}else {
-			fee = 6.75;
-			customer.setPaidStudentFee(true);
-		}
-		//return customer.getFee();
-		return fee;
-	}
-	
 	public int getMovieQuantity(int j) {
 		int moviequant = 0;
 		for(int i = 0; i<productInvList.size(); i++) {
@@ -161,7 +113,90 @@ public class indInvoice {
 		return moviequant;
 	}
 	
+	public double getSubtotal() {
+		double allSub = 0;
+		int j = 0;
+		for (Product p : productInvList) {
+			double subtotal = p.getSubtotal(Integer.parseInt(quantity.get(j)));
+			if (p.getType().equals("P")) {
+				int moviequant = getMovieQuantity(j);
+				int quantitypp =Integer.parseInt(quantity.get(j))-moviequant;
+				if (quantitypp<0) {
+					quantitypp = 0;
+				}
+				subtotal = p.getSubtotal(quantitypp);
+			} 
+			allSub = allSub  + subtotal;
+			j = j +1;
+		}
+		return allSub;
+	}
 	
+	public double getTax() {
+		double allTax = 0;
+		int i =0;
+		for (Product p : productInvList) {
+			double tax = p.getTax();
+			if (customer.getType().equals("S")) {
+				 tax = 0.0;
+			} else {
+				allTax = allTax + tax*p.getCost()*Integer.parseInt(quantity.get(i));
+			}
+			i++; 
+		}
+		return allTax;
+	}
+	
+	//change 
+	public double getDiscount() {
+		int i = 0;
+		double Alldiscount = 0;
+		for (Product p : productInvList) {
+			
+			double productDiscount = p.getDiscount();
+			if (p.getType().equals("R")) {
+				boolean variable = getRefreshmentDiscount();
+				if(variable) {
+					productDiscount = p.getDiscount();
+				}else {
+					productDiscount = 0.0;
+				}
+			}
+			
+			Alldiscount = productDiscount*p.getCost()*Integer.parseInt(quantity.get(i))+Alldiscount;
+			i++;
+		}
+		double studentDiscount = customer.getStudentDiscount();
+		return Alldiscount-(Alldiscount*studentDiscount);
+	}
+	
+	public double getFees() {
+		double fee;
+		if (customer.isPaidStudentFee()) {
+			fee = 0;
+		}else {
+			fee = 6.75;
+			customer.setPaidStudentFee(true);
+		}
+		//return customer.getFee();
+		return fee;
+	}
+	
+	
+	
+	public boolean getRefreshmentDiscount() {
+		boolean var = false;
+		for(Product p:productInvList) {
+			if(p.getType().equals("M")) {
+				var = true;
+				break;
+			}else {
+				var = false;
+			}
+			
+		}
+		return var;
+	}
 	
 	
 }

@@ -20,33 +20,32 @@ public class InvoiceReport {
 		System.out.println("===================");
 		System.out.println( "Executive Summary Report");
 		System.out.println("===================");
-		System.out.format("Invoice" + "\n", "\t" , "Customer" , "\t\t\t\t\t\t" , "Salesperson" , "\t\t\t\t" , "Subtotal" , "\t\t" , "Fees" , "\t\t" , "Taxes" , "\t\t" , "Discount" , "\t\t\t" );
+		System.out.format("%-6s %-29s %-15s %-21s %-15s %-15s %-15s %-15s %-15s \n", "Invoice", "Customer","Type", "Salesperson","Subtotal","Tax","Fees","Discount","Total");
 		
 		for (indInvoice i : invoiceList) {
 			
-			double total = (i.getSubtotal() + i.getFees() + (i.getTax()*i.getSubtotal()))* i.getDiscount();
+			double total = (i.getSubtotal() + i.getFees() + i.getTax()- i.getDiscount());
 			//format print
-			System.out.format("%-6s %-30s %-20s %-15.2f %-15.2f %-15.2f %-15.2f %-15.2f \n" ,i.getInvoiceCode(), i.getCustomer().getName(), i.getCustomer().getType()+ i.getSalesperson().getName(), i.getSubtotal(), i.getTax()*i.getSubtotal(), i.getFees(), i.getDiscount()*i.getSubtotal(), total);
+			System.out.format("%-6s %-30s %-10s %-26s %-15.2f %-15.2f %-15.2f %-15.2f %-15.2f \n" ,i.getInvoiceCode(), i.getCustomer().getName(), i.getCustomer().getType(), i.getSalesperson().getName(), i.getSubtotal(), i.getTax(), i.getFees(), i.getDiscount(), total);
 			
 		}
 		
 		System.out.println("\n\n");
-		//Print the rest of the invoices
-		//loop through the invoices
-		//print customer, salesperson, contact info
-		//loop through the product list of the invoices
+		
 		ArrayList<String> quantity = new ArrayList<String>();
 		ArrayList<String> ticketCode = new ArrayList<String>();
 		
 		System.out.println("Individual Invoice Detail Report");
 		System.out.println("-------------------------------------------------------");
+		
+		
+		//loop throught the invoices to print the individual summaries
+		
 		for (indInvoice in : invoiceList) {
 			System.out.println("Invoice" + in.getInvoiceCode());
 			System.out.println("-------------------------------------------------------");
-			//print salesperson
 			System.out.println("Salesperson: " + in.getSalesperson().getLastName() + ", " + in.getSalesperson().getFirstName());
 			System.out.println("Customer Information");
-			//System.out.println("-------------------------------------------------------");
 			System.out.println(in.getCustomer().getName() + " ("+ in.getCustomer().getCustomerCode()+ ")");
 			System.out.println("["+in.getCustomer().getStringType() + "]");
 			System.out.println(in.getCustomer().getContact().getName());
@@ -54,39 +53,46 @@ public class InvoiceReport {
 			System.out.println("-------------------------------------------------------");
 	    	System.out.format("%-10s %-55s %-16s %-16s %-15s", "Code", "Item", "Subtotal", "Tax", "Total");
 	    	System.out.format("\n");
+	    
 	    	
-
-			
-			
-			//print Customer info
-			//print contact info
-			
-			
-			//products
+	    	
 			quantity = in.getQuantity();
 			int j = 0;
 			double allSub = 0;
 			double allTax=0;
+			
+			
+			
+			//loop through the product list
 		
 			for (Product p : in.getProductList()) {
 				
-				//print product code
-				//print product name (toString method)
-				//print numUnits quantity.get(j)
-				//print cost/unit  getCost method   (with -- free for parking pass method)
-				//print subtotal, tax, ProductTotal
+	
 				double subtotal = p.getSubtotal(Integer.parseInt(quantity.get(j)));
 
+				//parking pass is free with each ticket
 				if (p.getType().equals("P")) {
 					int moviequant = in.getMovieQuantity(j);
-					int quantitypp = Math.abs(Integer.parseInt(quantity.get(j))-moviequant);
-					if (quantitypp>Integer.parseInt(quantity.get(j))) {
-						quantitypp = Integer.parseInt(quantity.get(j));
+					int quantitypp =Integer.parseInt(quantity.get(j))-moviequant;
+					if (quantitypp<0) {
+						quantitypp = 0;
 					}
 					subtotal = p.getSubtotal(quantitypp);
+				} 
+				
+				if (p.getType().equals("M")) {
+					double discount = p.getDiscount();
+					subtotal = subtotal- (discount*subtotal);
 				}
 				
-			
+				if (p.getType().equals("R")) {
+					boolean variable = in.getRefreshmentDiscount();
+					if(variable) {
+						subtotal = subtotal- (subtotal*p.getDiscount());
+					}
+				}
+				
+			    //students pay no tax
 				double tax = p.getTax()*subtotal;
 				if (in.getCustomer().getType().equals("S")) {
 					 tax = 0.0;
