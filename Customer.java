@@ -8,17 +8,19 @@ public class Customer {
 	private String name;
 	private Address address;
 	private double studentDiscount;
-	private double fee;
+	//private double fee;
+	private boolean paidStudentFee;
 	
 	
 	
-	public Customer(String customerCode, String type, Person contact, String name, Address address) {
+	public Customer(String customerCode, String type, Person contact, String name, Address address, boolean paidStudentFee) {
 		super();
 		this.customerCode = customerCode;
 		this.type = type;
 		this.contact = contact;
 		this.setName(name);
 		this.address = address;
+		this.paidStudentFee = false;
 	}
 	
 	
@@ -63,14 +65,25 @@ public class Customer {
 		return studentDiscount;
 	}
 
-	public double getFee() {
+	/*public double getFee() {
 		if(type.equals("S")) {
 			fee = 6.75;
 		}else {
 			fee = 0.0;
 		}
 		return fee;
+	}*/
+
+
+	public boolean isPaidStudentFee() {
+		return paidStudentFee;
 	}
+
+
+	public void setPaidStudentFee(boolean paidStudentFee) {
+		this.paidStudentFee = paidStudentFee;
+	}
+	
 	
 		
 }

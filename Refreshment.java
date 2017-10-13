@@ -25,7 +25,7 @@ public class Refreshment extends Product {
 	
 	@Override	
 	public double getSubtotal(int quantity) {
-		return quantity*Integer.parseInt(cost);
+		return quantity*Double.parseDouble(cost);
 	}
 	
 	@Override
@@ -41,7 +41,7 @@ public class Refreshment extends Product {
 	
 	@Override
 	public double getCost() {
-		return Integer.parseInt(cost);
+		return Double.parseDouble(cost);
 	}
 	
 	

@@ -12,7 +12,7 @@ public class PersonFileReader {
 	Scanner sc = null;
 		
 		try {
-			sc = new Scanner(new File("data/testPerson.dat"));
+			sc = new Scanner(new File("data/Persons.dat"));
 			sc.nextLine(); // reads the number of records from the first line
 			
 			// This Person ArrayList stores the Person objects 

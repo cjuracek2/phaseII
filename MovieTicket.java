@@ -1,5 +1,10 @@
 package phaseII;
 
+import java.time.format.DateTimeFormatter;
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+
 public class MovieTicket extends Product {
 	private String movieDate;
 	//joda time
@@ -63,7 +68,7 @@ public class MovieTicket extends Product {
 	
 	@Override	
 	public double getSubtotal(int quantity) {
-		return quantity*Integer.parseInt(pricePerUnit);
+		return quantity*Double.parseDouble(pricePerUnit);
 	}
 	
 	@Override
@@ -73,12 +78,28 @@ public class MovieTicket extends Product {
 		
 	@Override
 	public double getDiscount() {
+		double discount;
 		//7% discount if Tues/Thurs
+		org.joda.time.format.DateTimeFormatter dateStringFormat = DateTimeFormat.forPattern("yyyy-MM-ddHH:mm");
+		//DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
+		//DateTime dt = new DateTime(movieDate);
+		DateTime date = dateStringFormat.parseDateTime(movieDate);
+		
+		int day = date.getDayOfWeek();
+		if (day ==2) {
+			discount = .07;
+			
+		}else if (day == 4) {
+			discount = .07;
+		}else {
+			discount = 0.;
+		}
+		return discount;
 	}
 	
 	@Override
 	public double getCost() {
-		return Integer.parseInt(pricePerUnit);
+		return Double.parseDouble(pricePerUnit);
 	}
 	
 	

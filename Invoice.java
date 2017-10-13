@@ -6,13 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/*import phase1.Customer;
-import phase1.CustomerReader;
-import phase1.Person;
-import phase1.PersonFileReader;
-import phase1.Product;
-import phase1.ProductExporter;
-*/
+
 
 public class Invoice {
 	
@@ -61,7 +55,7 @@ public class Invoice {
 	Scanner sc = null;
 			
 			 try{
-				sc = new Scanner(new File("data/invoice.dat"));
+				sc = new Scanner(new File("data/Invoices.dat"));
 				sc.nextLine(); // reads the number of records from the first line
 				
 				// This Invoice array list stores the Invoice objects 
@@ -92,7 +86,7 @@ public class Invoice {
 							if (productData.length == 3) {
 								 ticketCode.add(productData[2]);
 							}else { 
-								ticketCode.add(null);
+								ticketCode.add("-999");
 							}
 							
 							Product product = findProductByID(productCode);

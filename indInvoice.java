@@ -137,7 +137,15 @@ public class indInvoice {
 	}
 	
 	public double getFees() {
-		return customer.getFee();
+		double fee;
+		if (customer.isPaidStudentFee()/*.equals(True)*/) {
+			fee = 0;
+		}else {
+			fee = 6.75;
+			customer.setPaidStudentFee(true);
+		}
+		//return customer.getFee();
+		return fee;
 	}
 	
 	public int getMovieQuantity(int j) {
@@ -145,6 +153,8 @@ public class indInvoice {
 		for(int i = 0; i<productInvList.size(); i++) {
 			if (ticketCode.get(j).equals(productInvList.get(i).getProductCode())) {
 				moviequant = Integer.parseInt(quantity.get(i));
+			}else {
+				moviequant = 0;
 			}
 		}
 		return moviequant;

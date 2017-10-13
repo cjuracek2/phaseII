@@ -30,7 +30,7 @@ ParkingPass extends Product {
 	@Override	
 	//quantity = quantity parking passes - quantity of tickets
 	public double getSubtotal(int quantity) {
-		return quantity*Integer.parseInt(parkingFee);
+		return quantity*Double.parseDouble(parkingFee);
 	}
 	
 	
@@ -46,7 +46,7 @@ ParkingPass extends Product {
 	
 	@Override
 	public double getCost() {
-		return Integer.parseInt(parkingFee);
+		return Double.parseDouble(parkingFee);
 	}
 	
 	
