@@ -10,24 +10,27 @@ public class InvoiceReport {
 		Invoice inv = new Invoice();
 		
 		ArrayList<indInvoice> invoiceList = inv.readInvoice();
-		System.out.println(invoiceList);
+		
 		
 		//------------------------------------------------------------------------------------------------------------
 		//print summary invoice
 		//loop through the invoiceList
 		//Call the invoice methods to get overall subtotals, fees, etc
 	
-		
+		System.out.println("===================");
+		System.out.println( "Executive Summary Report");
+		System.out.println("===================");
+		System.out.format("Invoice" + "\n", "\t" , "Customer" , "\t\t\t\t\t\t" , "Salesperson" , "\t\t\t\t" , "Subtotal" , "\t\t" , "Fees" , "\t\t" , "Taxes" , "\t\t" , "Discount" , "\t\t\t" );
 		
 		for (indInvoice i : invoiceList) {
 			
 			double total = (i.getSubtotal() + i.getFees() + (i.getTax()*i.getSubtotal()))* i.getDiscount();
 			//format print
-			String line = String.format("",i.getInvoiceCode(), i.getCustomer().getName(), i.getCustomer().getType(), i.getSalesperson().getName(), i.getSubtotal(), i.getTax()*i.getSubtotal(), i.getFees(), i.getDiscount()*i.getSubtotal(), total);
+			System.out.format("%-6s %-30s %-20s %-15.2f %-15.2f %-15.2f %-15.2f %-15.2f \n" ,i.getInvoiceCode(), i.getCustomer().getName(), i.getCustomer().getType()+ i.getSalesperson().getName(), i.getSubtotal(), i.getTax()*i.getSubtotal(), i.getFees(), i.getDiscount()*i.getSubtotal(), total);
 			
 		}
 		
-
+		System.out.println("\n\n");
 		//Print the rest of the invoices
 		//loop through the invoices
 		//print customer, salesperson, contact info
