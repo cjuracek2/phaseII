@@ -58,7 +58,7 @@ SeasonPass extends Product {
 		DateTime end = new DateTime(this.endDate);
 		DateTime inv = new DateTime(this.invDate);
 		int startend = Days.daysBetween(start.withTimeAtStartOfDay(), end.withTimeAtStartOfDay()).getDays();
-		int endinv = Days.daysBetween(inv.withTimeAtStartOfDay(), end.withTimeAtStartOfDay()).getDays();
+		int endinv = Days.daysBetween(end.withTimeAtStartOfDay(), inv.withTimeAtStartOfDay()).getDays();
 		
 		//(cost/days in the season)*days left in the season +8
 		double Subtotal;

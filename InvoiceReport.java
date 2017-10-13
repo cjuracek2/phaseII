@@ -34,9 +34,25 @@ public class InvoiceReport {
 		ArrayList<String> quantity = new ArrayList<String>();
 		ArrayList<String> ticketCode = new ArrayList<String>();
 		
-		
+		System.out.println("Individual Invoice Detail Report");
+		System.out.println("-------------------------------------------------------");
 		for (indInvoice in : invoiceList) {
+			System.out.println("Invoice" + in.getInvoiceCode());
+			System.out.println("-------------------------------------------------------");
 			//print salesperson
+			System.out.println("Salesperson: " + in.getSalesperson().getLastName() + ", " + in.getSalesperson().getFirstName());
+			System.out.println("Customer Information");
+			//System.out.println("-------------------------------------------------------");
+			System.out.println(in.getCustomer().getName() + " ("+ in.getCustomer().getCustomerCode()+ ")");
+			System.out.println("["+in.getCustomer().getStringType() + "]");
+			System.out.println(in.getCustomer().getContact().getName());
+			System.out.println(in.getCustomer().getContact().getAddress().toString());
+			System.out.println("-------------------------------------------------------");
+	    	System.out.format("%-10s %-49s %-16s %-16s %-15s", "Code", "Item", "Subtotal", "Tax", "Total");
+	    	System.out.format("\n");
+	    	
+
+			
 			
 			//print Customer info
 			//print contact info
@@ -46,7 +62,7 @@ public class InvoiceReport {
 			quantity = in.getQuantity();
 			int j = 0;
 			double allSub = 0;
-			double allTax = 0;
+			double allTax=0;
 		
 			for (Product p : in.getProductList()) {
 				
@@ -70,15 +86,25 @@ public class InvoiceReport {
 				} 
 				
 				double ProductTotal = subtotal + tax;
+				
+				System.out.format("%-10s %-50s", p.getProductCode(),"product info");
+				System.out.format("%1s %-14.2f %1s %-14.2f %1s %-14.2f \n", "$",subtotal, "$", tax, "$", ProductTotal );
 			
 				allSub = allSub  + subtotal;
 				allTax = allTax + tax;
+
 			}
-			
+			System.out.println("\n\n");
+
 			double allTotal = allSub + allTax;
 			//print all product subtotal, tax, total
 			
-			
+			System.out.format("%59s %-30s \n", " ", "---------------------------------------------");
+			System.out.print("SUBTOTALS");
+			System.out.format("%53s %-14.2f %1s %-14.2f %1s %-15.2f \n", "$", allSub, "$", allTax, "$", allSub+allTax);
+			System.out.format("\n \n");
+			System.out.println("             Thank you for your purchase!             ");
+			System.out.format("\n\n");
 			
 		}
 		

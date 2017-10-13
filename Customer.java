@@ -54,6 +54,16 @@ public class Customer {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getStringType() {
+		String whichType;
+		if (type.equals("S")) {
+			whichType = "Student";
+		} else {
+			whichType = "General";
+		}
+		return whichType;
+	}
 
 
 	public double getStudentDiscount() {

@@ -60,7 +60,7 @@ public class Invoice {
 				
 				// This Invoice array list stores the Invoice objects 
 				ArrayList<indInvoice> invoiceList = new ArrayList<indInvoice>();
-				ArrayList<Product> productInvList	= new ArrayList<Product>();
+				
 				ArrayList<String> quantity = new ArrayList<String>();
 				ArrayList<String> ticketCode = new ArrayList<String>();
 				
@@ -73,8 +73,9 @@ public class Invoice {
 					String customerCode = data[1];
 					String salespersonCode = data[2];
 					String date = data[3];
-					
+					ArrayList<Product> productInvList	= new ArrayList<Product>();
 					for (int i = 0; i<length-4; i++ ) {
+						
 						String products[] = data[i+4].split(",");
 						
 		
@@ -89,15 +90,16 @@ public class Invoice {
 								ticketCode.add("-999");
 							}
 							
-							Product product = findProductByID(productCode);
-							productInvList.add(product);
+							Product invproduct = findProductByID(productCode);
+							productInvList.add(invproduct);
 						}
+						
 					}
-
 					Customer customer = findCustomerByID(customerCode);
 					Person salesperson = findPersonByID(salespersonCode);
 					indInvoice invoice = new indInvoice(invoiceCode,customer,salesperson,date,productInvList,quantity,ticketCode);
 					invoiceList.add(invoice);
+					
 				}
 				sc.close();
 				return invoiceList;
