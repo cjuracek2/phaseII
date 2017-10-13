@@ -61,8 +61,7 @@ public class Invoice {
 				// This Invoice array list stores the Invoice objects 
 				ArrayList<indInvoice> invoiceList = new ArrayList<indInvoice>();
 				
-				ArrayList<String> quantity = new ArrayList<String>();
-				ArrayList<String> ticketCode = new ArrayList<String>();
+				
 				
 				
 				while(sc.hasNext()) {
@@ -74,6 +73,8 @@ public class Invoice {
 					String salespersonCode = data[2];
 					String date = data[3];
 					ArrayList<Product> productInvList	= new ArrayList<Product>();
+					ArrayList<String> quantity = new ArrayList<String>();
+					ArrayList<String> ticketCode = new ArrayList<String>();
 					for (int i = 0; i<length-4; i++ ) {
 						
 						String products[] = data[i+4].split(",");

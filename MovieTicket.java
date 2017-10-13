@@ -80,7 +80,7 @@ public class MovieTicket extends Product {
 	public double getDiscount() {
 		double discount;
 		//7% discount if Tues/Thurs
-		org.joda.time.format.DateTimeFormatter dateStringFormat = DateTimeFormat.forPattern("yyyy-MM-ddHH:mm");
+		org.joda.time.format.DateTimeFormatter dateStringFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
 		//DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
 		//DateTime dt = new DateTime(movieDate);
 		DateTime date = dateStringFormat.parseDateTime(movieDate);
@@ -101,6 +101,13 @@ public class MovieTicket extends Product {
 	public double getCost() {
 		return Double.parseDouble(pricePerUnit);
 	}
+
+	@Override
+	public String toString(int quantity) {
+		return "MovieTicket "+ movieName + " @ " + getAddress().getStreet() + "\n           " + movieDate + " (" + quantity + " units @ $" + getCost()+")                     ";
+	}
+	
+	
 	
 	
 }

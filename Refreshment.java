@@ -44,5 +44,9 @@ public class Refreshment extends Product {
 		return Double.parseDouble(cost);
 	}
 	
+	@Override
+	public String toString(int quantity) {
+		return "Refreshment "+ getName() + " (" + quantity + " units @ $"+ getCost() +")";
+	}
 	
 }

@@ -1,6 +1,7 @@
 package phaseII;
 
 import java.util.*;
+import java.lang.Math.*;
 
 public class InvoiceReport {
 
@@ -48,7 +49,7 @@ public class InvoiceReport {
 			System.out.println(in.getCustomer().getContact().getName());
 			System.out.println(in.getCustomer().getContact().getAddress().toString());
 			System.out.println("-------------------------------------------------------");
-	    	System.out.format("%-10s %-49s %-16s %-16s %-15s", "Code", "Item", "Subtotal", "Tax", "Total");
+	    	System.out.format("%-10s %-55s %-16s %-16s %-15s", "Code", "Item", "Subtotal", "Tax", "Total");
 	    	System.out.format("\n");
 	    	
 
@@ -75,10 +76,13 @@ public class InvoiceReport {
 
 				if (p.getType().equals("P")) {
 					int moviequant = in.getMovieQuantity(j);
-					int quantitypp = Integer.parseInt(quantity.get(j))-moviequant;
+					int quantitypp = Math.abs(Integer.parseInt(quantity.get(j))-moviequant);
+					if (quantitypp>Integer.parseInt(quantity.get(j))) {
+						quantitypp = Integer.parseInt(quantity.get(j));
+					}
 					subtotal = p.getSubtotal(quantitypp);
 				}
-				j = j +1;
+				
 			
 				double tax = p.getTax()*subtotal;
 				if (in.getCustomer().getType().equals("S")) {
@@ -87,9 +91,9 @@ public class InvoiceReport {
 				
 				double ProductTotal = subtotal + tax;
 				
-				System.out.format("%-10s %-50s", p.getProductCode(),"product info");
+				System.out.format("%-10s %-55s", p.getProductCode(), p.toString(Integer.parseInt(quantity.get(j))));
 				System.out.format("%1s %-14.2f %1s %-14.2f %1s %-14.2f \n", "$",subtotal, "$", tax, "$", ProductTotal );
-			
+				j = j +1;
 				allSub = allSub  + subtotal;
 				allTax = allTax + tax;
 
@@ -99,9 +103,9 @@ public class InvoiceReport {
 			double allTotal = allSub + allTax;
 			//print all product subtotal, tax, total
 			
-			System.out.format("%59s %-30s \n", " ", "---------------------------------------------");
+			System.out.format("%65s %-30s \n", " ", "---------------------------------------------");
 			System.out.print("SUBTOTALS");
-			System.out.format("%53s %-14.2f %1s %-14.2f %1s %-15.2f \n", "$", allSub, "$", allTax, "$", allSub+allTax);
+			System.out.format("%58s %-14.2f %1s %-14.2f %1s %-15.2f \n", "$", allSub, "$", allTax, "$", allSub+allTax);
 			System.out.format("\n \n");
 			System.out.println("             Thank you for your purchase!             ");
 			System.out.format("\n\n");

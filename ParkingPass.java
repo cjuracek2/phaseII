@@ -48,6 +48,12 @@ ParkingPass extends Product {
 	public double getCost() {
 		return Double.parseDouble(parkingFee);
 	}
+
+	@Override
+	public String toString(int quantity) {
+		return "ParkingPass " + getProductCode() + " (" + quantity + " units @ $" + getCost()+ ")";
+	}
+	
 	
 	
 }

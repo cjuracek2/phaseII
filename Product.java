@@ -4,6 +4,7 @@ package phaseII;
 public abstract class Product {
 	private String productCode;
 	private String type;
+	
 
 
 	//constructor, wont be used in our code
@@ -34,6 +35,8 @@ public abstract class Product {
 	abstract public double getDiscount();
 	
 	abstract public double getCost();
+	
+	abstract public String toString(int quantity);
 
 	
 	

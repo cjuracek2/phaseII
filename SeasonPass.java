@@ -54,9 +54,9 @@ SeasonPass extends Product {
 	
 	@Override	
 	public double getSubtotal(int quantity) {
-		DateTime start = new DateTime(this.startdate);
-		DateTime end = new DateTime(this.endDate);
-		DateTime inv = new DateTime(this.invDate);
+		DateTime start = new DateTime(startdate);
+		DateTime end = new DateTime(endDate);
+		DateTime inv = new DateTime(invDate);
 		int startend = Days.daysBetween(start.withTimeAtStartOfDay(), end.withTimeAtStartOfDay()).getDays();
 		int endinv = Days.daysBetween(end.withTimeAtStartOfDay(), inv.withTimeAtStartOfDay()).getDays();
 		
@@ -83,10 +83,26 @@ SeasonPass extends Product {
 	
 	@Override
 	public double getCost() {
-		Days startend = Days.daysBetween(DateTime.parse(startdate), DateTime.parse(endDate));
-		Days endinv = Days.daysBetween(DateTime.parse(invDate), DateTime.parse(endDate));
-		return (Double.parseDouble(cost)/startend.getDays())*(endinv.getDays())+8.0;
+		DateTime start = new DateTime(startdate);
+		DateTime end = new DateTime(endDate);
+		DateTime inv = new DateTime(invDate);
+		int startend = Days.daysBetween(start.withTimeAtStartOfDay(), end.withTimeAtStartOfDay()).getDays();
+		int endinv = Days.daysBetween(end.withTimeAtStartOfDay(), inv.withTimeAtStartOfDay()).getDays();
+		double endcost = 0.00;
+		if (endinv >= startend) {
+			endcost = Double.parseDouble(cost) + 8 ;
+
+		}else {
+			endcost = (Double.parseDouble(cost)/startend)*(endinv)+8.0;
+		}
+		return endcost;
+	
+
 	}
 	
+	@Override
+	public String toString(int quantity) {
+		return "Season Pass " + getName() + " " + quantity + " units @ $" + getCost()+ ")";
+	}
 
 }

@@ -22,7 +22,7 @@ public class ProductExporter{
 		if(tester.equals("M")) {
 			String type = "M";
 			Scanner dT = new Scanner( tokenScanner.next() ).useDelimiter(" ");
-			String DateTime =  dT.next() + dT.next();
+			String DateTime =  dT.next()+ " " +dT.next();
 			dT.close();
 			String movieName = tokenScanner.next();
 			Scanner addressScanner = new Scanner(tokenScanner.next()).useDelimiter(",");

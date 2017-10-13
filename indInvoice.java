@@ -153,6 +153,7 @@ public class indInvoice {
 		for(int i = 0; i<productInvList.size(); i++) {
 			if (ticketCode.get(j).equals(productInvList.get(i).getProductCode())) {
 				moviequant = Integer.parseInt(quantity.get(i));
+				break;
 			}else {
 				moviequant = 0;
 			}
