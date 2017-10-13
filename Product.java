@@ -3,13 +3,14 @@ package phaseII;
 
 public abstract class Product {
 	private String productCode;
-	private char Type;
+	private String type;
+
 
 	//constructor, wont be used in our code
-	public Product(String productCode, char type) {
+	public Product(String productCode, String type) {
 		super();
 		this.productCode = productCode;
-		Type = type;
+		this.type = type;
 	}
 	
 	//getters and setters, will be overrode in child code
@@ -19,12 +20,21 @@ public abstract class Product {
 	public void setProductCode(String productCode) {
 		this.productCode = productCode;
 	}
-	public char getType() {
-		return Type;
+	public String getType() {
+		return type;
 	}
-	public void setType(char type) {
-		Type = type;
+	public void setType(String type) {
+		this.type = type;
 	}
+	
+	abstract public double getSubtotal(int quantity);
+	
+	abstract public double getTax();
+	
+	abstract public double getDiscount();
+	
+	abstract public double getCost();
+
 	
 	
 }

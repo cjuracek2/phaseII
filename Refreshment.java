@@ -4,7 +4,7 @@ public class Refreshment extends Product {
 	private String name;
 	private String cost;
 	
-	public Refreshment(String productCode, char type, String name, String cost) {
+	public Refreshment(String productCode, String type, String name, String cost) {
 		super(productCode, type);
 		this.name = name;
 		this.cost = cost;
@@ -18,12 +18,30 @@ public class Refreshment extends Product {
 		this.name = name;
 	}
 
-	public String getCost() {
-		return cost;
-	}
 
 	public void setCost(String cost) {
 		this.cost = cost;
+	}
+	
+	@Override	
+	public double getSubtotal(int quantity) {
+		return quantity*Double.parseDouble(cost);
+	}
+	
+	@Override
+	public double getTax() {
+		return .06;
+	}
+		
+	@Override
+	public double getDiscount() {
+		//5% if the invoice also has a ticket
+		return .05;
+	}
+	
+	@Override
+	public double getCost() {
+		return Double.parseDouble(cost);
 	}
 	
 	

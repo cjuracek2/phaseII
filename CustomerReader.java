@@ -27,7 +27,7 @@ public class CustomerReader {
 	Scanner sc = null;
 		
 		try {
-			sc = new Scanner(new File("data/testCustomer.dat"));
+			sc = new Scanner(new File("data/Customers.dat"));
 			sc.nextLine(); // reads the number of records from the first line
 			
 			// This Person ArrayList stores the Customer objects 
@@ -61,10 +61,10 @@ public class CustomerReader {
 				Address address = new Address(street,city,state,zip,country);
 				
 				// Creates a Customer object
-				Customer customer = new Customer(customerCode, type, contact, name, address);
+				Customer customer = new Customer(customerCode, type, contact, name, address,false);
 				
 				
-				// Adds the Person object into Customer ArrayList
+				// Adds the customer object into Customer ArrayList
 				customerList.add(customer);
 			}
 			sc.close();
