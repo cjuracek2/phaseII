@@ -1,0 +1,6 @@
+5
+brtye;S;food drive special;2020-12-13;2022-01-07;120.00
+fbeer3;R;House brew;7.89
+fp12;M;2010-10-21 10:10; Monster inc.;398 South 144th ,pleasanton, NE, 69789, USA;2qw; 1.50
+9qa;P;35.00
+4567542184876;M;2000-09-17 5:30;DeadPool;766 Washington blvd,greandale, WI, 59713, USA;13;11.50

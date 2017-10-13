@@ -1,0 +1,4 @@
+6
+C001;G;c6j2nj;Lab class;1223 Othmer,Lincoln,NE,68503, Murica
+C002;S;322422;CGI;123 Venture Way,Bulder City,NM,97639,USA
+C003;G;dgjn89;Henderson HWY;370 North 895th St.,75369,NE,68537,USA
