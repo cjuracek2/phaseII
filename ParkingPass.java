@@ -4,24 +4,24 @@ package phaseII;
 public class
 
 ParkingPass extends Product {
-	private double parkingFee;
+	private String parkingFee;
 
-	public ParkingPass(String productCode, String type, double parkingFee) {
+	public ParkingPass(String productCode, String type, String parkingFee) {
 		super(productCode, type);
 		this.parkingFee = parkingFee;
 	}
 
-	public double getParkingFee() {
+	public String getParkingFee() {
 		return parkingFee;
 	}
 
-	public void setParkingFee(double parkingFee) {
+	public void setParkingFee(String parkingFee) {
 		this.parkingFee = parkingFee;
 	}
 	
 	
 	//number of free parking passes
-	public int getNumFree(int quantitymovie, int quantitypp) {
+	public int getNumFree(int quantitymovie) {
 		return quantitymovie;
 	}
 	
@@ -30,7 +30,7 @@ ParkingPass extends Product {
 	@Override	
 	//quantity = quantity parking passes - quantity of tickets
 	public double getSubtotal(int quantity) {
-		return quantity*parkingFee;
+		return quantity*Integer.parseInt(parkingFee);
 	}
 	
 	
@@ -46,7 +46,7 @@ ParkingPass extends Product {
 	
 	@Override
 	public double getCost() {
-		return parkingFee;
+		return Integer.parseInt(parkingFee);
 	}
 	
 	

@@ -6,12 +6,12 @@ public class
 
 SeasonPass extends Product {
 	private String name;
-	private DateTime startdate;
-	private DateTime endDate;
-	private double cost;
-	private DateTime invDate;
+	private String startdate;
+	private String endDate;
+	private String cost;
+	private String invDate;
 	
-	public SeasonPass(String productCode, String type, String name, DateTime startdate, DateTime endDate, double cost) {
+	public SeasonPass(String productCode, String type, String name, String startdate, String endDate, String cost) {
 		super(productCode, type);
 		this.name = name;
 		this.startdate = startdate;
@@ -28,37 +28,37 @@ SeasonPass extends Product {
 	}
 
 	public DateTime getStartdate() {
-		return startdate;
+		return DateTime.parse(startdate);
 	}
 
-	public void setStartdate(DateTime startdate) {
+	public void setStartdate(String startdate) {
 		this.startdate = startdate;
 	}
 
 	public DateTime getEndDate() {
-		return endDate;
+		return DateTime.parse(endDate);
 	}
 
-	public void setEndDate(DateTime endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
 
-	public void setCost(double cost) {
+	public void setCost(String cost) {
 		this.cost = cost;
 	}
 	
-	public void setInvDate(DateTime invDate) {
+	public void setInvDate(String invDate) {
 		this.invDate = invDate;
 	}
 	
 	@Override	
 	public double getSubtotal(int quantity) {
-		Days startend = Days.daysBetween(startdate, endDate);
-		Days endinv = Days.daysBetween(invDate, startdate);
+		Days startend = Days.daysBetween(DateTime.parse(startdate), DateTime.parse(endDate));
+		Days endinv = Days.daysBetween(DateTime.parse(invDate), DateTime.parse(startdate));
 		
 		//(cost/days in the season)*days left in the season +8
-		return quantity*((cost/startend.getDays())*(endinv.getDays())+8.0);
+		return quantity*((Integer.parseInt(cost)/startend.getDays())*(endinv.getDays())+8.0);
 	}
 	
 	@Override
@@ -73,9 +73,9 @@ SeasonPass extends Product {
 	
 	@Override
 	public double getCost() {
-		Days startend = Days.daysBetween(startdate, endDate);
-		Days endinv = Days.daysBetween(invDate, startdate);
-		return (cost/startend.getDays())*endinv.getDays()+8.0;
+		Days startend = Days.daysBetween(DateTime.parse(startdate), DateTime.parse(endDate));
+		Days endinv = Days.daysBetween(DateTime.parse(invDate), DateTime.parse(endDate));
+		return (Integer.parseInt(cost)/startend.getDays())*endinv.getDays()+8.0;
 	}
 	
 

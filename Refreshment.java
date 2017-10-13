@@ -2,9 +2,9 @@ package phaseII;
 
 public class Refreshment extends Product {
 	private String name;
-	private double cost;
+	private String cost;
 	
-	public Refreshment(String productCode, String type, String name, double cost) {
+	public Refreshment(String productCode, String type, String name, String cost) {
 		super(productCode, type);
 		this.name = name;
 		this.cost = cost;
@@ -19,13 +19,13 @@ public class Refreshment extends Product {
 	}
 
 
-	public void setCost(double cost) {
+	public void setCost(String cost) {
 		this.cost = cost;
 	}
 	
 	@Override	
 	public double getSubtotal(int quantity) {
-		return quantity*cost;
+		return quantity*Integer.parseInt(cost);
 	}
 	
 	@Override
@@ -41,7 +41,7 @@ public class Refreshment extends Product {
 	
 	@Override
 	public double getCost() {
-		return cost;
+		return Integer.parseInt(cost);
 	}
 	
 	

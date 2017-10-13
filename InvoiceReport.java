@@ -33,7 +33,7 @@ public class InvoiceReport {
 		ArrayList<String> ticketCode = new ArrayList<String>();
 		
 		
-		for (indInvoice i : invoiceList) {
+		for (indInvoice in : invoiceList) {
 			//print salesperso
 			
 			//print Customer info
@@ -41,12 +41,12 @@ public class InvoiceReport {
 			
 			
 			//products
-			quantity = i.getQuantity();
+			quantity = in.getQuantity();
 			int j = 0;
 			double allSub = 0;
 			double allTax = 0;
 		
-			for (Product p : i.getProductList()) {
+			for (Product p : in.getProductList()) {
 				
 				//print product code
 				//print product name (toString method)
@@ -56,14 +56,14 @@ public class InvoiceReport {
 				double subtotal = p.getSubtotal(Integer.parseInt(quantity.get(j)));
 
 				if (p.getType().equals("P")) {
-					int moviequant = i.getMovieQuantity(j);
+					int moviequant = in.getMovieQuantity(j);
 					int quantitypp = Integer.parseInt(quantity.get(j))-moviequant;
 					subtotal = p.getSubtotal(quantitypp);
 				}
 				j = j +1;
 			
 				double tax = p.getTax()*subtotal;
-				if (i.getCustomer().getType().equals("S")) {
+				if (in.getCustomer().getType().equals("S")) {
 					 tax = 0.0;
 				} 
 				

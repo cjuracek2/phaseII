@@ -6,10 +6,11 @@ public class MovieTicket extends Product {
 	private String movieName;
 	private Address address;
 	private String screenNo;
-	private double pricePerUnit;
+	//private double pricePerUnit;
+	private String pricePerUnit;
 
 	
-	public MovieTicket(String productCode, String type, String movieDate, String movieName, Address address,String screenNo, double pricePerUnit) {
+	public MovieTicket(String productCode, String type, String movieDate, String movieName, Address address,String screenNo, String pricePerUnit) {
 		super(productCode, type);
 		this.movieDate = movieDate;
 		this.movieName = movieName;
@@ -50,11 +51,11 @@ public class MovieTicket extends Product {
 		this.screenNo = screenNo;
 	}
 
-	public double getPricePerUnit() {
+	public String getPricePerUnit() {
 		return pricePerUnit;
 	}
 
-	public void setPricePerUnit(double pricePerUnit) {
+	public void setPricePerUnit(String pricePerUnit) {
 		this.pricePerUnit = pricePerUnit;
 	}
 	
@@ -62,7 +63,7 @@ public class MovieTicket extends Product {
 	
 	@Override	
 	public double getSubtotal(int quantity) {
-		return quantity*pricePerUnit;
+		return quantity*Integer.parseInt(pricePerUnit);
 	}
 	
 	@Override
@@ -77,7 +78,7 @@ public class MovieTicket extends Product {
 	
 	@Override
 	public double getCost() {
-		return pricePerUnit;
+		return Integer.parseInt(pricePerUnit);
 	}
 	
 	
