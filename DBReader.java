@@ -37,7 +37,7 @@ public class DBReader {
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				
-				emailList.add(rs.getString("Emails"));
+				emailList.add(rs.getString("Email"));
 			}
 			rs.close();
 			conn.close();
@@ -68,7 +68,7 @@ public class DBReader {
 		Person p = new Person();
 		Address a = new Address();
 		
-		String query = "SELECT * FROM TABLE Person WHERE PersonID LIKE ?";
+		String query = "SELECT * FROM Person WHERE PersonID LIKE ?";
 		Connection conn = DatabaseInfo.getConnection();
 		
 		
@@ -144,7 +144,7 @@ public class DBReader {
 		Customer c = new Customer();
 		Address a = new Address();
 		
-		String query = "SELECT * FROM TABLE Customer WHERE CustomerID LIKE ?";
+		String query = "SELECT * FROM Customer WHERE CustomerID LIKE ?";
 		Connection conn = DatabaseInfo.getConnection();
 		
 		
@@ -160,10 +160,10 @@ public class DBReader {
 				//call object
 				
 				c.setCustomerCode(rs.getString("CustomerID"));
-				c.setType(rs.getString("Type"));
+				c.setType(rs.getString("CustomerType"));
 				Person contact = getDetailedPerson(rs.getString("PersonID"));
 				c.setContact(contact);
-				c.setName(rs.getString("Name"));
+				c.setName(rs.getString("CustomerName"));
 				//Address Setters
 				a.setStreet(rs.getString("Address"));
 				a.setCity(rs.getString("City"));
@@ -224,7 +224,7 @@ public class DBReader {
 		
 		MovieTicket pr = new MovieTicket();
 		
-		String query = "SELECT * FROM TABLE Product WHERE ProdcutID LIKE ?";
+		String query = "SELECT * FROM Product WHERE ProductID LIKE ?";
 		Connection conn = DatabaseInfo.getConnection();
 		
 		
@@ -237,7 +237,7 @@ public class DBReader {
 			rs = ps.executeQuery();
 			if(rs.next()) {
 					pr.setProductCode(rs.getString("ProductID"));
-					pr.setType(rs.getString("Type"));
+					pr.setType(rs.getString("ProductType"));
 					pr.setMovieDate(rs.getString("ProductDate"));
 					pr.setMovieName(rs.getString("ProductName"));
 					pr.setScreenNo(rs.getString("ScreenNo"));
@@ -257,7 +257,7 @@ public class DBReader {
 		
 		SeasonPass pr = new SeasonPass();
 		
-		String query = "SELECT * FROM TABLE Product WHERE ProdcutID LIKE ?";
+		String query = "SELECT * FROM Product WHERE ProductID LIKE ?";
 		Connection conn = DatabaseInfo.getConnection();
 		
 		
@@ -271,7 +271,7 @@ public class DBReader {
 			if(rs.next()) {
 		
 					pr.setProductCode(rs.getString("ProductID"));
-					pr.setType(rs.getString("Type"));
+					pr.setType(rs.getString("ProductType"));
 					pr.setName(rs.getString("ProductName"));
 					pr.setStartdate(rs.getString("ProductStartDate"));
 					pr.setEndDate(rs.getString("ProductEndDate"));
@@ -291,7 +291,7 @@ public class DBReader {
 		
 		Refreshment pr = new Refreshment();
 		
-		String query = "SELECT * FROM TABLE Product WHERE ProdcutID LIKE ?";
+		String query = "SELECT * FROM Product WHERE ProductID LIKE ?";
 		Connection conn = DatabaseInfo.getConnection();
 		
 		
@@ -305,7 +305,7 @@ public class DBReader {
 			if(rs.next()) {
 				
 					pr.setProductCode(rs.getString("ProductID"));
-					pr.setType(rs.getString("Type"));
+					pr.setType(rs.getString("ProductType"));
 					pr.setName(rs.getString("ProductName"));
 					pr.setCost(rs.getString("ProductCost"));
 					
@@ -323,7 +323,7 @@ public class DBReader {
 		
 		ParkingPass pr = new ParkingPass();
 		
-		String query = "SELECT * FROM TABLE Product WHERE ProdcutID LIKE ?";
+		String query = "SELECT * FROM Product WHERE ProductID LIKE ?";
 		Connection conn = DatabaseInfo.getConnection();
 		
 		
@@ -337,7 +337,7 @@ public class DBReader {
 			if(rs.next()) {
 			
 					pr.setProductCode(rs.getString("ProductID"));
-					pr.setType(rs.getString("Type"));
+					pr.setType(rs.getString("ProductType"));
 					pr.setParkingFee(rs.getString("ProductCost"));
 			}
 			
@@ -355,7 +355,7 @@ public class DBReader {
 	
 	public ArrayList<Product> getProducts(String InvoiceID){
 		ArrayList<Product> productList = new ArrayList<Product>();
-		String query = "SELECT Type, ProductID FROM ProductList JOIN Product ON ProductList.ProductID = Product.ProductID WHERE InvoiceID LIKE ?";
+		String query = "SELECT ProductType, ProductList.ProductID FROM ProductList JOIN Product ON ProductList.ProductID = Product.ProductID WHERE InvoiceID LIKE ?";
 		Connection conn = DatabaseInfo.getConnection();
 		
 		PreparedStatement ps = null;
@@ -367,16 +367,16 @@ public class DBReader {
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				
-				if(rs.getString("Type").equals("M")) {
+				if(rs.getString("ProductType").equals("M")) {
 					Product newproduct = getDetailedMovie(rs.getString("ProductID"));
 					productList.add(newproduct);
-				}else if (rs.getString("Type").equals("S")) {
+				}else if (rs.getString("ProductType").equals("S")) {
 					Product newproduct = getDetailedSeasonPass(rs.getString("ProductID"));
 					productList.add(newproduct);
-				}else if (rs.getString("Type").equals("P")){
+				}else if (rs.getString("ProductType").equals("P")){
 					Product newproduct = getDetailedParkingPass(rs.getString("ProductID"));
 					productList.add(newproduct);
-				}else if (rs.getString("Type").equals("R")){
+				}else if (rs.getString("ProductType").equals("R")){
 					Product newproduct = getDetailedRefreshment(rs.getString("ProductID"));
 					productList.add(newproduct);
 				}
@@ -399,7 +399,7 @@ public class DBReader {
 	public indInvoice getDetailedInvoice(String InvoiceID) {
 		indInvoice i = new indInvoice();
 		
-		String query = "SELECT * FROM TABLE Invoice WHERE InvoiceID LIKE ?";
+		String query = "SELECT * FROM Invoice WHERE InvoiceID LIKE ?";
 		Connection conn = DatabaseInfo.getConnection();
 		
 		
@@ -418,12 +418,15 @@ public class DBReader {
 				i.setCustomer(customer);
 				Person salesperson = getDetailedPerson(rs.getString("PersonID"));
 				i.setSalesperson(salesperson);
-				i.setDate(rs.getString("Date"));
+				i.setDate(rs.getString("InvoiceDate"));
 				ArrayList<Product> invProductList = getProducts(rs.getString("InvoiceID"));
 				i.setProductList(invProductList);
-				//get Product List based on invoice *this will match the quantity and ticket arrays
-				//arraylist quantity
-				//arraylist ticketcode
+				
+				ArrayList<String> quantity = getQuantity(rs.getString("InvoiceID"));
+				i.setQuantity(quantity);
+				
+				ArrayList<String> ticketCode = getTicketCode(rs.getString("InvoiceID"));
+				i.setTicketCode(ticketCode);
 			}
 			
 		} catch (SQLException e) {
@@ -467,7 +470,7 @@ public class DBReader {
 	
 	public ArrayList<String> getTicketCode(String InvoiceID){
 		ArrayList<String> ticketCode = new ArrayList<String>();
-		String query = "SELECT TicketCode FROM ProductList WHERE Invoice ID LIKE ?";
+		String query = "SELECT AssociatedTicket FROM ProductList WHERE InvoiceID LIKE ?";
 Connection conn = DatabaseInfo.getConnection();
 		
 		PreparedStatement ps = null;
@@ -492,7 +495,7 @@ Connection conn = DatabaseInfo.getConnection();
 		return ticketCode;
 	}
 	
-	public List<indInvoice> getInvoices(){
+	public ArrayList<indInvoice> getInvoices(){
 		ArrayList<indInvoice> invoiceList = new ArrayList<indInvoice>();
 		String query = "SELECT InvoiceID FROM Invoice";
 		Connection conn = DatabaseInfo.getConnection();
